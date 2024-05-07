@@ -40,7 +40,7 @@ jobs:
       run: | #安装pip包
          pip install -r ./utils/pool/requirements.txt
          pip install -r ./utils/clashcheck/requirements.txt
-    - name: pool #input ./utils/pool/config.yaml
+#    - name: pool #input ./utils/pool/config.yaml
       run: cd ./utils/pool/ && python main.py #output ./utils/pool/output.yaml
 #    - name: pull clashcheck file #如果您想要fork本仓库并运行此workflow，请用#号注释掉这一行和下两行并删除上方四行开头的#并按照yaml文件格式对其行头
 #      id: clashcheck
