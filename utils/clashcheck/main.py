@@ -5,6 +5,7 @@ from check import check
 from tqdm import tqdm
 from init import init, clean
 from clash import push, checkenv, checkuse
+from security import safe_command
 
 if __name__ == '__main__':
     with Manager() as manager:
@@ -12,7 +13,7 @@ if __name__ == '__main__':
         http_port, api_port, threads, source, timeout, outfile, proxyconfig, apiurl, testurl, config= init()
         clashname, operating_system = checkenv()
         checkuse(clashname[2::], operating_system)
-        clash = subprocess.Popen([clashname, '-f', './temp/working.yaml', '-d', '.'])
+        clash = safe_command.run(subprocess.Popen, [clashname, '-f', './temp/working.yaml', '-d', '.'])
         processes =[]
         sema = Semaphore(threads)
         time.sleep(5)
