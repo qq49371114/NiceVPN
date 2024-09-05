@@ -2,6 +2,8 @@ import requests
 import json
 import yaml
 import time
+from security import safe_requests
+
 def get_file_list():
     try:
         start = time.time()
@@ -21,7 +23,7 @@ def get_file_list():
 
 def get_proxies(date, file):
     baseurl = 'https://raw.githubusercontent.com/changfengoss/pub/main/data/'
-    working = yaml.safe_load(requests.get(url=baseurl+date+'/'+file,).text)
+    working = yaml.safe_load(safe_requests.get(url=baseurl+date+'/'+file,).text)
     data_out = []
     for x in working['proxies']:
         data_out.append(x)

@@ -1,9 +1,9 @@
 import os
 import yaml
 import shutil
-import requests
 from clash import filter
 from yaml import SafeLoader
+from security import safe_requests
 
 def init():
     if not os.path.exists('./temp'):
@@ -22,9 +22,9 @@ def init():
         outfile = config['outfile']
     # get clash config file
     if source.startswith('http://'):
-        proxyconfig = yaml.load(requests.get(source).text, Loader=SafeLoader)
+        proxyconfig = yaml.load(safe_requests.get(source).text, Loader=SafeLoader)
     elif source.startswith('https://'):
-        proxyconfig = yaml.load(requests.get(source).text, Loader=SafeLoader)
+        proxyconfig = yaml.load(safe_requests.get(source).text, Loader=SafeLoader)
     else:
         with open(source, 'r') as reader:
             proxyconfig = yaml.load(reader, Loader=SafeLoader)
