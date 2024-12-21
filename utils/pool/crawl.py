@@ -5,7 +5,7 @@ import time
 def get_file_list():
     try:
         start = time.time()
-        rawdata = json.loads(requests.get('https://api.github.com/repos/changfengoss/pub/git/trees/main?recursive=1').text)
+        rawdata = json.loads(requests.get('https://api.github.com/repos/changfengoss/pub/git/trees/main?recursive=1', timeout=60).text)
         data = rawdata['tree']
         dirlist = []
         count = 0
@@ -21,7 +21,7 @@ def get_file_list():
 
 def get_proxies(date, file):
     baseurl = 'https://raw.githubusercontent.com/changfengoss/pub/main/data/'
-    working = yaml.safe_load(requests.get(url=baseurl+date+'/'+file,).text)
+    working = yaml.safe_load(requests.get(url=baseurl+date+'/'+file,timeout=60).text)
     data_out = []
     for x in working['proxies']:
         data_out.append(x)
